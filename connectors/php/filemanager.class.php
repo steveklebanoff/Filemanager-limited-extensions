@@ -233,6 +233,13 @@ class Filemanager {
         $this->error(sprintf($this->lang('UPLOAD_IMAGES_TYPE_JPEG_GIF_PNG')),true);
       }
     }
+    
+    $fileExt = $this->getExtension($_FILES['newfile']['name']);
+    if ((!empty($this->config['allowed_file_extensions'])) && (!in_array($fileExt, $this->config['allowed_file_extensions'])))
+    {
+        $this->error(sprintf($this->lang('INVALID_FILE_TYPE')),true);
+    }
+    
     $_FILES['newfile']['name'] = $this->cleanString($_FILES['newfile']['name'],array('.','-'));
     if(!$this->config['upload']['overwrite']) {
       $_FILES['newfile']['name'] = $this->checkFilename($this->doc_root . $this->post['currentpath'],$_FILES['newfile']['name']);
@@ -351,6 +358,11 @@ class Filemanager {
 
     $this->item['properties']['Date Modified'] = date($this->config['date'], $this->item['filemtime']);
     //$return['properties']['Date Created'] = date($config['date'], $return['filectime']); // PHP cannot get create timestamp
+  }
+  
+  private function getExtension($stringVar)
+  {
+        return end(explode('.',$stringVar));
   }
 
   private function unlinkRecursive($dir,$deleteRootToo=true) {

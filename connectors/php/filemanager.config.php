@@ -55,6 +55,14 @@ $config['upload']['imagesonly'] = false; // true or false; Only allow images (jp
  */
 $config['images'] = array('jpg', 'jpeg','gif','png');
 
+/**
+ * Allowed file extensin to upload
+ * Specify file types by array, i.e:
+ * $config['allowed_file_extensions'] = array('jpg', 'jpeg', 'gif', 'png', 'pdf', 'txt');
+ * An empty array means you allow all types
+ * */
+$config['allowed_file_extensions'] = array();
+
 
 /**
  *	Files and folders

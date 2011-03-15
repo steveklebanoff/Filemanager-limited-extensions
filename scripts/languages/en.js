@@ -12,6 +12,7 @@
 	"ERROR_RENAMING_FILE": "Error while renaming the file %s to %s.",
 	"INVALID_DIRECTORY_OR_FILE": "Invalid directory or file.",
 	"INVALID_FILE_UPLOAD": "Invalid file upload.",
+    "INVALID_FILE_TYPE": "Invalid file type",
 	"UPLOAD_FILES_SMALLER_THAN": "Please upload only files smaller than %s.",
 	"UPLOAD_IMAGES_ONLY": "Please upload only images, no other files are supported.",
 	"UPLOAD_IMAGES_TYPE_JPEG_GIF_PNG": "Please upload only images of type JPEG, GIF or PNG.",
