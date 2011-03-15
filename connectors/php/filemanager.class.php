@@ -235,9 +235,14 @@ class Filemanager {
     }
     
     $fileExt = $this->getExtension($_FILES['newfile']['name']);
-    if ((!empty($this->config['allowed_file_extensions'])) && (!in_array($fileExt, $this->config['allowed_file_extensions'])))
-    {
-        $this->error(sprintf($this->lang('INVALID_FILE_TYPE')),true);
+    if (!empty($this->config['allowed_file_extensions'])) {
+        /* Add capitalized versions of file names */
+        $allowedFileExtensionsCapitalized = array_map("strtoupper", $this->config['allowed_file_extensions']);
+        $allowedFileExtensions = array_merge($this->config['allowed_file_extensions'], $allowedFileExtensionsCapitalized);
+        if (!in_array($fileExt, $allowedFileExtensions)) {
+            $this->error(sprintf($this->lang('INVALID_FILE_TYPE')),true);
+        }
+        
     }
     
     $_FILES['newfile']['name'] = $this->cleanString($_FILES['newfile']['name'],array('.','-'));
@@ -247,6 +252,7 @@ class Filemanager {
     move_uploaded_file($_FILES['newfile']['tmp_name'], $this->doc_root . $this->post['currentpath'] . $_FILES['newfile']['name']);
 
     $response = array(
+            'Debug' => $allowedFileExtensions,
 			'Path'=>$this->post['currentpath'],
 			'Name'=>$_FILES['newfile']['name'],
 			'Error'=>"",
